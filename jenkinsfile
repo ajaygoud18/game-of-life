@@ -1,0 +1,17 @@
+pipeline {
+    agent { label 'QA' }
+    triggers { pollSCM ('* * * * *')}
+    stages{
+        stage('Git'){
+            steps {
+                git branch: 'master' , url:'https://github.com/ajaygoud18/game-of-life'
+            }
+        }
+        stage('Build'){
+            steps {
+                sh 'mvn package'
+            }
+        }
+    }   
+        
+}
